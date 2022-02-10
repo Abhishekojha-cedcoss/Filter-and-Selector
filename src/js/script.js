@@ -101,17 +101,16 @@ $("#head").css("background-color","Cyan");
 
 
 //Filtering the search
-$("body").on("keyup", "#search", function(){
-  var s=$("#search").val();
-  var prod=products.filter((v,i) =>{
-      var n=v.name;
-      return n.toLowerCase() == s.toLowerCase() || v.id == s;
-  });
-  if(s.length == 0){
-      prod=products;
-  }
-  createTable(prod);
+$(document).ready(function(){
+  $("#search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("table tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });createSearchTable(prod);
 });
+
+
 
 //DropDown options
 function DropDownOptions(opts, value){
